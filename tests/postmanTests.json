@@ -1,0 +1,49 @@
+{
+  "info": {
+    "_postman_id": "201bb3bd-c896-486a-9696-6687ee2ad421",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53657248",
+    "_collection_link": "https://go.postman.co/collection/53657248-201bb3bd-c896-486a-9696-6687ee2ad421?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "fastApi",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"API Health Check\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "    pm.response.to.be.success;\r",
+              "    pm.expect(pm.response.reponseTime).to.be.below(2000);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000"
+        }
+      },
+      "response": []
+    }
+  ]
+}
