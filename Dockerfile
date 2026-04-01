@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install --no-cache-dir fastapi uvicorn requests pytest
+RUN pip install --no-cache-dir fastapi uvicorn requests pytest pymongo
 
 EXPOSE 8000
 
