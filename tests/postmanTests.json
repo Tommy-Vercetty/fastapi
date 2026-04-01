@@ -23,7 +23,7 @@
               "pm.test(\"API Health Check\", function () {\r",
               "    pm.response.to.have.status(200);\r",
               "    pm.response.to.be.success;\r",
-              "    pm.expect(pm.response.reponseTime).to.be.below(2000);\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
               "});"
             ],
             "type": "text/javascript",
@@ -59,6 +59,8 @@
               "});\r",
               "\r",
               "pm.test(\"Product Structure Testing\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    \r",
               "    pm.expect(jsonData).to.have.property(\"ProductID\");\r",
               "    pm.expect(jsonData).to.have.property(\"Name\");\r",
               "    pm.expect(jsonData).to.have.property(\"UnitPrice\");\r",
@@ -79,7 +81,18 @@
       ],
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/getSingleProduct",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "getSingleProduct"
+          ]
+        }
       },
       "response": []
     },
@@ -236,7 +249,7 @@
               "\r",
               "    if (Array.isArray(jsonData)) {\r",
               "        jsonData.forEach(product => {\r",
-              "            pm.expect(product.produictID).to.be.within(1, 10);\r",
+              "            pm.expect(product.productID).to.be.within(1, 10);\r",
               "        })\r",
               "    }\r",
               "});"
@@ -249,7 +262,18 @@
       ],
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/paginate",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "paginate"
+          ]
+        }
       },
       "response": []
     },
