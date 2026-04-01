@@ -25,13 +25,13 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/getSingleProduct?productID=1",
+          "raw": "http://localhost:8000/getSingleProduct?productID=1003",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["getSingleProduct"],
           "query": [
-            { "key": "productID", "value": "1" }
+            { "key": "productID", "value": "1003" }
           ]
         }
       }
@@ -70,13 +70,13 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/deleteOne?productID=1",
+          "raw": "http://localhost:8000/deleteOne?productID=1003",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["deleteOne"],
           "query": [
-            { "key": "productID", "value": "1" }
+            { "key": "productID", "value": "1003" }
           ]
         }
       }
@@ -85,15 +85,14 @@
       "name": "/startsWith",
       "request": {
         "method": "GET",
-        "header": [],
         "url": {
-          "raw": "http://localhost:8000/startsWith?letter=a",
+          "raw": "http://localhost:8000/startsWith?letter=C",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["startsWith"],
           "query": [
-            { "key": "letter", "value": "a" }
+            { "key": "letter", "value": "C" }
           ]
         }
       }
@@ -102,16 +101,15 @@
       "name": "/paginate",
       "request": {
         "method": "GET",
-        "header": [],
         "url": {
-          "raw": "http://localhost:8000/paginate?start=1&end=10",
+          "raw": "http://localhost:8000/paginate?start=1003&end=1033",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["paginate"],
           "query": [
-            { "key": "start", "value": "1" },
-            { "key": "end", "value": "10" }
+            { "key": "start", "value": "1003" },
+            { "key": "end", "value": "1033" }
           ]
         }
       }
@@ -120,9 +118,8 @@
       "name": "/convert",
       "request": {
         "method": "GET",
-        "header": [],
         "url": {
-          "raw": "http://localhost:8000/convert?productID=1",
+          "raw": "http://localhost:8000/convert?productID=1003",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
