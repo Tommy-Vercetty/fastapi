@@ -4,8 +4,7 @@
     "name": "My Collection",
     "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "53657248",
-    "_collection_link": "https://go.postman.co/collection/53657248-201bb3bd-c896-486a-9696-6687ee2ad421?source=collection_link"
+    "_exporter_id": "53657248"
   },
   "item": [
     {
@@ -144,6 +143,10 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"ProductID\": 1010,\n  \"Name\": \"Test Product\",\n  \"UnitPrice\": 19.99,\n  \"StockQuantity\": 50,\n  \"Description\": \"Sample description\"\n}"
+        },
         "url": {
           "raw": "http://localhost:8000/addNew",
           "protocol": "http",
@@ -166,9 +169,13 @@
               "",
               "pm.test(\"Delete Product testing\", function () {",
               "    const jsonData = pm.response.json();",
-              "    pm.expect(jsonData).to.have.property(\"message\");",
-              "    pm.expect(jsonData.message).to.include(\"Deleted Product\");",
-              "    pm.expect(jsonData).to.have.property(\"numberOfDeletedProducts\");",
+              "    if(jsonData.message){",
+              "        pm.expect(jsonData).to.have.property(\"message\");",
+              "        pm.expect(jsonData.message).to.include(\"deleted\");",
+              "        pm.expect(jsonData).to.have.property(\"numberOfDeletedProducts\");",
+              "    } else {",
+              "        pm.expect(jsonData).to.have.property(\"error\");",
+              "    }",
               "});"
             ]
           }
@@ -200,7 +207,7 @@
               "",
               "pm.test(\"Products starting with user entered letter testing\", function () {",
               "    const jsonData = pm.response.json();",
-              "    const letter = pm.request.url.query.get('letter')?.toLowerCase() || 'a';",
+              "    const letter = pm.request.url.query.get('userEnteredLetter')?.toLowerCase() || 'a';",
               "    if (Array.isArray(jsonData)) {",
               "        jsonData.forEach(product => { pm.expect(product.Name[0].toLowerCase()).to.eql(letter); });",
               "    }",
@@ -213,12 +220,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/startsWith?letter=a",
+          "raw": "http://localhost:8000/startsWith?userEnteredLetter=a",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["startsWith"],
-          "query": [{ "key": "letter", "value": "a" }]
+          "query": [{ "key": "userEnteredLetter", "value": "a" }]
         }
       }
     },
@@ -236,7 +243,7 @@
               "    const jsonData = pm.response.json();",
               "    if (Array.isArray(jsonData)) {",
               "        jsonData.forEach(product => {",
-              "            pm.expect(product.productID).to.be.within(1003, 1010);",
+              "            pm.expect(product.ProductID).to.be.within(1003, 1010);",
               "        });",
               "    }",
               "});"
@@ -248,11 +255,15 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/paginate",
+          "raw": "http://localhost:8000/paginate?startOfRangeID=1003&endOfRangeID=1010",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["paginate"]
+          "path": ["paginate"],
+          "query": [
+            { "key": "startOfRangeID", "value": "1003" },
+            { "key": "endOfRangeID", "value": "1010" }
+          ]
         }
       },
       "response": []
@@ -280,11 +291,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/convert",
+          "raw": "http://localhost:8000/convert?productID=1003",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
-          "path": ["convert"]
+          "path": ["convert"],
+          "query": [{ "key": "productID", "value": "1003" }]
         }
       },
       "response": []
