@@ -32,7 +32,12 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": { "raw": "http://localhost:8000", "protocol": "http", "host": ["localhost"], "port": "8000" }
+        "url": {
+          "raw": "http://localhost:8000",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000"
+        }
       },
       "response": []
     },
@@ -103,7 +108,17 @@
           }
         }
       ],
-      "request": { "method": "GET", "header": [] },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/getAll",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["getAll"]
+        }
+      },
       "response": []
     },
     {
@@ -128,7 +143,14 @@
       ],
       "request": {
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }]
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": {
+          "raw": "http://localhost:8000/addNew",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["addNew"]
+        }
       },
       "response": []
     },
@@ -152,7 +174,18 @@
           }
         }
       ],
-      "request": { "method": "GET", "header": [] },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/deleteOne?productID=1003",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["deleteOne"],
+          "query": [{ "key": "productID", "value": "1003" }]
+        }
+      },
       "response": []
     },
     {
@@ -176,7 +209,18 @@
           }
         }
       ],
-      "request": { "method": "GET", "header": [] }
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/startsWith?letter=a",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["startsWith"],
+          "query": [{ "key": "letter", "value": "a" }]
+        }
+      }
     },
     {
       "name": "/paginate",
@@ -203,7 +247,13 @@
       "request": {
         "method": "GET",
         "header": [],
-        "url": { "raw": "http://localhost:8000/paginate", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["paginate"] }
+        "url": {
+          "raw": "http://localhost:8000/paginate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["paginate"]
+        }
       },
       "response": []
     },
@@ -226,7 +276,17 @@
           }
         }
       ],
-      "request": { "method": "GET", "header": [], "url": { "raw": "http://localhost:8000/convert", "protocol": "http", "host": ["localhost"], "port": "8000", "path": ["convert"] } },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/convert",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["convert"]
+        }
+      },
       "response": []
     }
   ]
