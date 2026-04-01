@@ -23,7 +23,7 @@
               "pm.test(\"API Health Check\", function () {\r",
               "    pm.response.to.have.status(200);\r",
               "    pm.response.to.be.success;\r",
-              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+              "    pm.expect(pm.response.reponseTime).to.be.below(2000);\r",
               "});"
             ],
             "type": "text/javascript",
@@ -280,7 +280,18 @@
       ],
       "request": {
         "method": "GET",
-        "header": []
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/convert",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "convert"
+          ]
+        }
       },
       "response": []
     }
