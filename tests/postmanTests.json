@@ -9,12 +9,13 @@
   },
   "item": [
     {
-      "name": "fastApi",
+      "name": "/",
       "event": [
         {
           "listen": "test",
           "script": {
             "exec": [
+              "//Root Endpoint Testing\r",
               "pm.test(\"Status code is 200\", function () {\r",
               "    pm.response.to.have.status(200);\r",
               "});\r",
@@ -22,7 +23,7 @@
               "pm.test(\"API Health Check\", function () {\r",
               "    pm.response.to.have.status(200);\r",
               "    pm.response.to.be.success;\r",
-              "    pm.expect(pm.response.reponseTime).to.be.below(2000);\r",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
               "});"
             ],
             "type": "text/javascript",
@@ -42,6 +43,244 @@
           ],
           "port": "8000"
         }
+      },
+      "response": []
+    },
+    {
+      "name": "/getSingleProduct",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//getSingleProduct Testing\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Product Structure Testing\", function () {\r",
+              "    pm.expect(jsonData).to.have.property(\"ProductID\");\r",
+              "    pm.expect(jsonData).to.have.property(\"Name\");\r",
+              "    pm.expect(jsonData).to.have.property(\"UnitPrice\");\r",
+              "    pm.expect(jsonData).to.have.property(\"StockQuantity\");\r",
+              "    pm.expect(jsonData).to.have.property(\"Description\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"ProductID Matches the Request\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData.ProductID).to.eql(1);\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "/getAll",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//getAll Testing\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Returns all products in an array\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "    pm.expect(jsonData).to.be.an(\"array\");\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Testing each product has its required fields\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    if (jsonData.length > 0) {\r",
+              "        pm.expect(jsonData[0]).to.have.property(\"ProductID\");\r",
+              "        pm.expect(jsonData[0]).to.have.property(\"Name\");\r",
+              "    }\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "/addNew",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//addNew Testing\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Product Adding testing\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData).to.have.property(\"message\");\r",
+              "    pm.expect(jsonData.message).to.include(\"Product added\");\r",
+              "    pm.expect(jsonData).to.have.property(\"newlyInsertedProductID\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "/deleteOne",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//deleteOne Testing\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Delete Product testing\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData).to.have.property(\"message\");\r",
+              "    pm.expect(jsonData.message).to.include(\"Deleted Product\");\r",
+              "    pm.expect(jsonData).to.have.property(\"numberOfDeletedProducts\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "/startsWith",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//startsWith Testing\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Products starting with user entered letter testing\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    if (Array.isArray(jsonData)) {\r",
+              "        jsonData.forEach(product => {\r",
+              "            pm.expect(product.Name[0].toLowerCase()).to.eql(\"a\")\r",
+              "        })\r",
+              "    }\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "/paginate",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//paginate Testing\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"Products are wihin the selected range testing\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    if (Array.isArray(jsonData)) {\r",
+              "        jsonData.forEach(product => {\r",
+              "            pm.expect(product.produictID).to.be.within(1, 10);\r",
+              "        })\r",
+              "    }\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "/convert",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//convert Testing\r",
+              "pm.test(\"Status code is 200\", function () {\r",
+              "    pm.response.to.have.status(200);\r",
+              "});\r",
+              "\r",
+              "pm.test(\"USD to EUR\", function () {\r",
+              "    const jsonData = pm.response.json();\r",
+              "\r",
+              "    pm.expect(jsonData).to.have.property(\"UnitPriceEUR\");\r",
+              "    pm.expect(jsonData.UnitPriceEUR).to.be.a(\"number\");\r",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": []
       },
       "response": []
     }
