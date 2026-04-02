@@ -139,7 +139,7 @@
       ],
       "request": {
         "method": "GET",
-        "url": "http://localhost:8000/deleteOne?productID=1015"
+        "url": "http://localhost:8000/deleteOne?productID=1068"
       }
     },
     {
