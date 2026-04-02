@@ -61,7 +61,7 @@
               "",
               "pm.test(\"ProductID Matches the Request\", function () {",
               "    const jsonData = pm.response.json();",
-              "    pm.expect(jsonData.ProductID).to.be.within(1003, 9999);",
+              "    pm.expect(jsonData.ProductID).to.eql(1005);",
               "});"
             ]
           }
@@ -71,12 +71,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/getSingleProduct?productID=1003",
+          "raw": "http://localhost:8000/getSingleProduct?productID=1005",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["getSingleProduct"],
-          "query": [{ "key": "productID", "value": "1003" }]
+          "query": [{ "key": "productID", "value": "1005" }]
         }
       },
       "response": []
@@ -185,12 +185,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/deleteOne?productID=1003",
+          "raw": "http://localhost:8000/deleteOne?productID=1004",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["deleteOne"],
-          "query": [{ "key": "productID", "value": "1003" }]
+          "query": [{ "key": "productID", "value": "1004" }]
         }
       },
       "response": []
@@ -243,7 +243,7 @@
               "    const jsonData = pm.response.json();",
               "    if (Array.isArray(jsonData)) {",
               "        jsonData.forEach(product => {",
-              "            pm.expect(product.ProductID).to.be.within(1003, 1010);",
+              "            pm.expect(product.ProductID).to.be.within(1005, 1010);",
               "        });",
               "    }",
               "});"
@@ -255,13 +255,13 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/paginate?startOfRangeID=1003&endOfRangeID=1010",
+          "raw": "http://localhost:8000/paginate?startOfRangeID=1005&endOfRangeID=1010",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["paginate"],
           "query": [
-            { "key": "startOfRangeID", "value": "1003" },
+            { "key": "startOfRangeID", "value": "1005" },
             { "key": "endOfRangeID", "value": "1010" }
           ]
         }
@@ -291,12 +291,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/convert?productID=1003",
+          "raw": "http://localhost:8000/convert?productID=1005",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["convert"],
-          "query": [{ "key": "productID", "value": "1003" }]
+          "query": [{ "key": "productID", "value": "1005" }]
         }
       },
       "response": []
