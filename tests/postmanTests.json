@@ -185,12 +185,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/deleteOne?productID=1004",
+          "raw": "http://localhost:8000/deleteOne?productID=1006",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["deleteOne"],
-          "query": [{ "key": "productID", "value": "1004" }]
+          "query": [{ "key": "productID", "value": "1006" }]
         }
       },
       "response": []
@@ -243,7 +243,7 @@
               "    const jsonData = pm.response.json();",
               "    if (Array.isArray(jsonData)) {",
               "        jsonData.forEach(product => {",
-              "            pm.expect(product.ProductID).to.be.within(1005, 1010);",
+              "            pm.expect(product.ProductID).to.be.within(1010, 1015);",
               "        });",
               "    }",
               "});"
@@ -255,14 +255,14 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/paginate?startOfRangeID=1005&endOfRangeID=1010",
+          "raw": "http://localhost:8000/paginate?startOfRangeID=1010&endOfRangeID=1015",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["paginate"],
           "query": [
-            { "key": "startOfRangeID", "value": "1005" },
-            { "key": "endOfRangeID", "value": "1010" }
+            { "key": "startOfRangeID", "value": "1010" },
+            { "key": "endOfRangeID", "value": "1015" }
           ]
         }
       },
