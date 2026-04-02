@@ -50,7 +50,7 @@
               "    pm.expect(jsonData).to.have.property(\"Description\");",
               "});",
               "pm.test(\"ProductID Matches the Request\", function () {",
-              "    pm.expect(jsonData.ProductID).to.eql(1005);",
+              "    pm.expect(jsonData.ProductID).to.eql(1065);",
               "});"
             ]
           }
@@ -58,7 +58,7 @@
       ],
       "request": {
         "method": "GET",
-        "url": "http://localhost:8000/getSingleProduct?productID=1005"
+        "url": "http://localhost:8000/getSingleProduct?productID=1065"
       }
     },
     {
