@@ -30,15 +30,8 @@
       ],
       "request": {
         "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8000",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000"
-        }
-      },
-      "response": []
+        "url": "http://localhost:8000"
+      }
     },
     {
       "name": "/getSingleProduct",
@@ -47,20 +40,16 @@
           "listen": "test",
           "script": {
             "exec": [
-              "//getSingleProduct Testing",
               "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "",
+              "const jsonData = pm.response.json();",
               "pm.test(\"Product Structure Testing\", function () {",
-              "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData).to.have.property(\"ProductID\");",
               "    pm.expect(jsonData).to.have.property(\"Name\");",
               "    pm.expect(jsonData).to.have.property(\"UnitPrice\");",
               "    pm.expect(jsonData).to.have.property(\"StockQuantity\");",
               "    pm.expect(jsonData).to.have.property(\"Description\");",
               "});",
-              "",
               "pm.test(\"ProductID Matches the Request\", function () {",
-              "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData.ProductID).to.eql(1005);",
               "});"
             ]
@@ -69,17 +58,8 @@
       ],
       "request": {
         "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8000/getSingleProduct?productID=1005",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": ["getSingleProduct"],
-          "query": [{ "key": "productID", "value": "1005" }]
-        }
-      },
-      "response": []
+        "url": "http://localhost:8000/getSingleProduct?productID=1005"
+      }
     },
     {
       "name": "/getAll",
@@ -88,16 +68,12 @@
           "listen": "test",
           "script": {
             "exec": [
-              "//getAll Testing",
               "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "",
+              "const jsonData = pm.response.json();",
               "pm.test(\"Returns all products in an array\", function () {",
-              "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData).to.be.an(\"array\");",
               "});",
-              "",
               "pm.test(\"Testing each product has its required fields\", function () {",
-              "    const jsonData = pm.response.json();",
               "    if (jsonData.length > 0) {",
               "        pm.expect(jsonData[0]).to.have.property(\"ProductID\");",
               "        pm.expect(jsonData[0]).to.have.property(\"Name\");",
@@ -109,16 +85,8 @@
       ],
       "request": {
         "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8000/getAll",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": ["getAll"]
-        }
-      },
-      "response": []
+        "url": "http://localhost:8000/getAll"
+      }
     },
     {
       "name": "/addNew",
@@ -127,11 +95,9 @@
           "listen": "test",
           "script": {
             "exec": [
-              "//addNew Testing",
               "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "",
+              "const jsonData = pm.response.json();",
               "pm.test(\"Product Adding testing\", function () {",
-              "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData).to.have.property(\"message\");",
               "    pm.expect(jsonData.message).to.include(\"Product added\");",
               "    pm.expect(jsonData).to.have.property(\"newlyInsertedProductID\");",
@@ -147,15 +113,8 @@
           "mode": "raw",
           "raw": "{\n  \"ProductID\": 1010,\n  \"Name\": \"Test Product\",\n  \"UnitPrice\": 19.99,\n  \"StockQuantity\": 50,\n  \"Description\": \"Sample description\"\n}"
         },
-        "url": {
-          "raw": "http://localhost:8000/addNew",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": ["addNew"]
-        }
-      },
-      "response": []
+        "url": "http://localhost:8000/addNew"
+      }
     },
     {
       "name": "/deleteOne",
@@ -164,13 +123,10 @@
           "listen": "test",
           "script": {
             "exec": [
-              "//deleteOne Testing",
               "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "",
+              "const jsonData = pm.response.json();",
               "pm.test(\"Delete Product testing\", function () {",
-              "    const jsonData = pm.response.json();",
               "    if(jsonData.message){",
-              "        pm.expect(jsonData).to.have.property(\"message\");",
               "        pm.expect(jsonData.message).to.include(\"deleted\");",
               "        pm.expect(jsonData).to.have.property(\"numberOfDeletedProducts\");",
               "    } else {",
@@ -183,17 +139,8 @@
       ],
       "request": {
         "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8000/deleteOne?productID=1009",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": ["deleteOne"],
-          "query": [{ "key": "productID", "value": "1009" }]
-        }
-      },
-      "response": []
+        "url": "http://localhost:8000/deleteOne?productID=1013"
+      }
     },
     {
       "name": "/startsWith",
@@ -202,31 +149,21 @@
           "listen": "test",
           "script": {
             "exec": [
-              "//startsWith Testing",
               "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "",
-              "pm.test(\"Products starting with user entered letter testing\", function () {",
-              "    const jsonData = pm.response.json();",
-              "    const letter = pm.request.url.query.get('userEnteredLetter')?.toLowerCase() || 'a';",
-              "    if (Array.isArray(jsonData)) {",
-              "        jsonData.forEach(product => { pm.expect(product.Name[0].toLowerCase()).to.eql(letter); });",
-              "    }",
-              "});"
+              "const jsonData = pm.response.json();",
+              "const letter = pm.request.url.query.get('userEnteredLetter')?.toLowerCase() || 'a';",
+              "if (Array.isArray(jsonData)) {",
+              "    jsonData.forEach(product => {",
+              "        pm.expect(product.Name[0].toLowerCase()).to.eql(letter);",
+              "    });",
+              "}"
             ]
           }
         }
       ],
       "request": {
         "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8000/startsWith?userEnteredLetter=a",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": ["startsWith"],
-          "query": [{ "key": "userEnteredLetter", "value": "a" }]
-        }
+        "url": "http://localhost:8000/startsWith?userEnteredLetter=a"
       }
     },
     {
@@ -236,14 +173,12 @@
           "listen": "test",
           "script": {
             "exec": [
-              "//paginate Testing",
               "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "",
+              "const jsonData = pm.response.json();",
               "pm.test(\"Products are within the selected range testing\", function () {",
-              "    const jsonData = pm.response.json();",
               "    if (Array.isArray(jsonData)) {",
               "        jsonData.forEach(product => {",
-              "            pm.expect(product.ProductID).to.be.within(1013, 1020);",
+              "            pm.expect(product.ProductID).to.be.within(1014, 1020);",
               "        });",
               "    }",
               "});"
@@ -253,20 +188,8 @@
       ],
       "request": {
         "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8000/paginate?startOfRangeID=1013&endOfRangeID=1020",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": ["paginate"],
-          "query": [
-            { "key": "startOfRangeID", "value": "1013" },
-            { "key": "endOfRangeID", "value": "1020" }
-          ]
-        }
-      },
-      "response": []
+        "url": "http://localhost:8000/paginate?startOfRangeID=1014&endOfRangeID=1020"
+      }
     },
     {
       "name": "/convert",
@@ -275,11 +198,9 @@
           "listen": "test",
           "script": {
             "exec": [
-              "//convert Testing",
               "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "",
+              "const jsonData = pm.response.json();",
               "pm.test(\"USD to EUR\", function () {",
-              "    const jsonData = pm.response.json();",
               "    pm.expect(jsonData).to.have.property(\"UnitPriceEUR\");",
               "    pm.expect(jsonData.UnitPriceEUR).to.be.a(\"number\");",
               "});"
@@ -289,17 +210,8 @@
       ],
       "request": {
         "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "http://localhost:8000/convert?productID=1113",
-          "protocol": "http",
-          "host": ["localhost"],
-          "port": "8000",
-          "path": ["convert"],
-          "query": [{ "key": "productID", "value": "1113" }]
-        }
-      },
-      "response": []
+        "url": "http://localhost:8000/convert?productID=1113"
+      }
     }
   ]
 }
