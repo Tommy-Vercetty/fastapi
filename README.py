@@ -10,12 +10,20 @@ lines = ["Assignment 1 README", "API Endpoints Overview:\n"]
 
 for item in collection.get('item', []):
     req = item.get('request', {})
-    url = req.get('url', {}).get('raw', 'Unknown URL')
+    url_field = req.get('url', 'Unknown URL')
+
+    # Handle both string URLs and dict URLs
+    if isinstance(url_field, dict):
+        url = url_field.get('raw', 'Unknown URL')
+        query_params = url_field.get('query', [])
+    else:
+        url = url_field
+        query_params = []
+
     method = req.get('method', 'GET')
     lines.append(f"Endpoint: {url}")
     lines.append(f"Method: {method}")
 
-    query_params = req.get('url', {}).get('query', [])
     if query_params:
         lines.append("Parameters:")
         for q in query_params:
