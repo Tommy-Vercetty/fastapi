@@ -185,12 +185,12 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "http://localhost:8000/deleteOne?productID=1006",
+          "raw": "http://localhost:8000/deleteOne?productID=1007",
           "protocol": "http",
           "host": ["localhost"],
           "port": "8000",
           "path": ["deleteOne"],
-          "query": [{ "key": "productID", "value": "1006" }]
+          "query": [{ "key": "productID", "value": "1007" }]
         }
       },
       "response": []
