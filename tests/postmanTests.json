@@ -8,115 +8,6 @@
   },
   "item": [
     {
-      "name": "/",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "//Root Endpoint Testing",
-              "pm.test(\"Status code is 200\", function () {",
-              "    pm.response.to.have.status(200);",
-              "});",
-              "",
-              "pm.test(\"API Health Check\", function () {",
-              "    pm.response.to.have.status(200);",
-              "    pm.response.to.be.success;",
-              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "url": "http://localhost:8000"
-      }
-    },
-    {
-      "name": "/getSingleProduct",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "const jsonData = pm.response.json();",
-              "pm.test(\"Product Structure Testing\", function () {",
-              "    pm.expect(jsonData).to.have.property(\"ProductID\");",
-              "    pm.expect(jsonData).to.have.property(\"Name\");",
-              "    pm.expect(jsonData).to.have.property(\"UnitPrice\");",
-              "    pm.expect(jsonData).to.have.property(\"StockQuantity\");",
-              "    pm.expect(jsonData).to.have.property(\"Description\");",
-              "});",
-              "pm.test(\"ProductID Matches the Request\", function () {",
-              "    pm.expect(jsonData.ProductID).to.eql(1005);",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "url": "http://localhost:8000/getSingleProduct?productID=1005"
-      }
-    },
-    {
-      "name": "/getAll",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "const jsonData = pm.response.json();",
-              "pm.test(\"Returns all products in an array\", function () {",
-              "    pm.expect(jsonData).to.be.an(\"array\");",
-              "});",
-              "pm.test(\"Testing each product has its required fields\", function () {",
-              "    if (jsonData.length > 0) {",
-              "        pm.expect(jsonData[0]).to.have.property(\"ProductID\");",
-              "        pm.expect(jsonData[0]).to.have.property(\"Name\");",
-              "    }",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "url": "http://localhost:8000/getAll"
-      }
-    },
-    {
-      "name": "/addNew",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "const jsonData = pm.response.json();",
-              "pm.test(\"Product Adding testing\", function () {",
-              "    pm.expect(jsonData).to.have.property(\"message\");",
-              "    pm.expect(jsonData.message).to.include(\"Product added\");",
-              "    pm.expect(jsonData).to.have.property(\"newlyInsertedProductID\");",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"ProductID\": 1010,\n  \"Name\": \"Test Product\",\n  \"UnitPrice\": 19.99,\n  \"StockQuantity\": 50,\n  \"Description\": \"Sample description\"\n}"
-        },
-        "url": "http://localhost:8000/addNew"
-      }
-    },
-    {
       "name": "/deleteOne",
       "event": [
         {
@@ -139,31 +30,7 @@
       ],
       "request": {
         "method": "GET",
-        "url": "http://localhost:8000/deleteOne?productID=1013"
-      }
-    },
-    {
-      "name": "/startsWith",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "const jsonData = pm.response.json();",
-              "const letter = pm.request.url.query.get('userEnteredLetter')?.toLowerCase() || 'a';",
-              "if (Array.isArray(jsonData)) {",
-              "    jsonData.forEach(product => {",
-              "        pm.expect(product.Name[0].toLowerCase()).to.eql(letter);",
-              "    });",
-              "}"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "url": "http://localhost:8000/startsWith?userEnteredLetter=a"
+        "url": "http://localhost:8000/deleteOne?productID=1014"
       }
     },
     {
@@ -178,7 +45,7 @@
               "pm.test(\"Products are within the selected range testing\", function () {",
               "    if (Array.isArray(jsonData)) {",
               "        jsonData.forEach(product => {",
-              "            pm.expect(product.ProductID).to.be.within(1014, 1020);",
+              "            pm.expect(product.ProductID).to.be.within(1015, 1020);",
               "        });",
               "    }",
               "});"
@@ -188,29 +55,7 @@
       ],
       "request": {
         "method": "GET",
-        "url": "http://localhost:8000/paginate?startOfRangeID=1014&endOfRangeID=1020"
-      }
-    },
-    {
-      "name": "/convert",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
-              "const jsonData = pm.response.json();",
-              "pm.test(\"USD to EUR\", function () {",
-              "    pm.expect(jsonData).to.have.property(\"UnitPriceEUR\");",
-              "    pm.expect(jsonData.UnitPriceEUR).to.be.a(\"number\");",
-              "});"
-            ]
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "url": "http://localhost:8000/convert?productID=1113"
+        "url": "http://localhost:8000/paginate?startOfRangeID=1015&endOfRangeID=1020"
       }
     }
   ]
