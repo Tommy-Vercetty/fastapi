@@ -7,20 +7,19 @@
 import pandas as pd
 from pymongo import MongoClient
 
-#STEP 1: Loading the CSV file
+#STEP 1: We start by loading the CSV file
 csvFile = pd.read_csv("products.csv")
 
-#STEP 2: Converting the CSV file into JSON format
+#STEP 2: Then, we convert the CSV file into JSON format
 jsonFile = csvFile.to_dict(orient = "records")
 
-#STEP 3: Connecting to our MongoDB Schema-Less Database
+#STEP 3: Next, we connect to our MongoDB Schema-Less Database
 client = MongoClient("mongodb+srv://root:root@cluster0.uaqpqn8.mongodb.net/?appName=Cluster0")
 
-#STEP 4: Selecting our newly created database and specific collection
+#STEP 4: Subsequently, we select our newly created database and specific collection
 db = client["assignment1"]
 dbCollection = db["products"]
 
-#STEP 5: Inserting our JSON data into the database
+#STEP 5: Lastly, we insert our JSON data into the database
 dbCollection.insert_many(jsonFile)
-
 print("Data inserted successfully!")
